@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>موقع محترف PS2 لدمج ملفات ul.cfg بكل سهولة</title>
+  <meta name="description" content="موقع عربي متخصص لتحميل أغلفة وأعمال فنية (ART) لألعاب بلايستيشن 2. ابحث بسهولة باستخدام معرف اللعبة واحصل على حزم صور ZIP جاهزة للاستخدام مع OPL وغيرها.">
+  <link rel="icon" href="MFPS2.PNG" type="image/png">
+  <link rel="styleasheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* --- التنسيقات الأساسية (للشاشات الكبيرة) --- */
+    body {
+      font-family: 'Tajawal', Arial, sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    h1 {
+      margin-top: 30px;
+      margin-bottom: 30px;
+      text-align: center;
+      color: white;
+      font-size: 32px;
+      line-height: 1.5;
+    }
+    .highlight { color: red; }
+    .card {
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      padding: 40px 30px;
+      margin: 0;
+      width: 95%;
+      max-width: 700px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+      box-sizing: border-box;
+    }
+    h2 {
+      color: #4fc3f7;
+      font-size: 28px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    p, li { 
+      font-size: 20px;
+      margin: 10px 0;
+    }
+    a {
+      color: #4fc3f7;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover { text-decoration: underline; }
+    ul {
+      text-align: right;
+      padding-right: 20px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      list-style-type: none;
+    }
+    label {
+        display: block;
+        text-align: right;
+        font-weight: bold;
+        font-size: 18px;
+        margin-top: 20px;
+        margin-bottom: 8px;
+        padding-right: 20px;
+    }
+    input[type="file"] {
+      display: block;
+      margin: 5px auto 15px auto;
+      background-color: #2c2c2c;
+      border: 1px solid #555;
+      padding: 14px;
+      border-radius: 8px;
+      color: #e0e0e0;
+      width: 90%;
+      max-width: 450px;
+      cursor: pointer;
+      font-size: 18px;
+      box-sizing: border-box;
+    }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    #processButton, #downloadButtonTrigger {
+      background-color: #2196f3;
+      color: white !important;
+      border: none;
+      padding: 16px 35px;
+      font-size: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s, opacity 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-decoration: none;
+      width: 100%;
+      max-width: 450px;
+      box-sizing: border-box;
+    }
+    #processButton:hover { background-color: #1976d2; }
+    #downloadButtonTrigger {
+      background-color: #4CAF50;
+    }
+    #downloadButtonTrigger:hover { background-color: #45a049; }
+    #downloadButtonTrigger:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    .spin {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #2196f3;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    #status {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      min-height: 28px;
+    }
+    i.fas, i.fab {
+        margin-left: 10px;
+    }
+    ol {
+        padding-right: 20px;
+    }
+
+    /* --- التنسيقات المتجاوبة (للشاشات الصغيرة كالهواتف) --- */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      .card {
+        padding: 25px 15px;
+        margin: 15px 0;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      h2 {
+        font-size: 20px;
+      }
+      p, li {
+        font-size: 16px;
+      }
+      label {
+        font-size: 16px;
+        padding-right: 10px;
+      }
+      input[type="file"] {
+          font-size: 16px;
+          padding: 12px;
+      }
+      #processButton, #downloadButtonTrigger {
+        font-size: 18px;
+        padding: 15px 20px;
+      }
+      #status {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1><i class="fas fa-layer-group"></i> موقع <span class="highlight">محترف PS2</span><br> لدمج ملفات ul.cfg بسهولة</h1>
+
+<div class="card">
+  <h2><i class="fas fa-tasks"></i> الخطوات</h2>
+  <ol>
+    <li>تابعنا على وسائل التواصل:
+      <ul>
+        <li><a href="https://youtube.com/@mohtaref_ps2" target="_blank"><i class="fab fa-youtube"></i>قناة اليوتيوب</a></li>
+        <li><a href="https://t.me/mohtaref_ps2_1" target="_blank"><i class="fab fa-telegram"></i>قناة التليجرام</a></li>
+        <li><a href="https://t.me/mohtaref_ps2_2" target="_blank"><i class="fas fa-users"></i>منتدى المتابعين</a></li>
+        <li><a href="https://t.me/mohtaref_ps2_3" target="_blank"><i class="fas fa-comments"></i>مجموعة الموضوعات</a></li>
+        <li><a href="https://www.tiktok.com/@mohtaref_ps2?_t=ZS-8wugDoiUrII&_r=1" target="_blank"><i class="fab fa-tiktok"></i>قناة التيك توك (محتوى اسطوري)</a></li>
+      </ul>
+    </li>
+    <li style="color: #ffeb3b;">حدد ملفات ul.cfg للدمج.</li>
+  </ol>
+
+  <label for="file1">الملف الأول:</label>
+  <input type="file" id="file1" accept=".cfg" onchange="resetProcessState()">
+  
+  <label for="file2">الملف الثاني:</label>
+  <input type="file" id="file2" accept=".cfg" onchange="resetProcessState()">
+
+  <div class="button-container">
+    <button id="processButton" onclick="processAndCombineFiles()"><i class="fas fa-cogs"></i>اضغط هنا للدمج</button>
+    <button id="downloadButtonTrigger" style="display: none;" onclick="triggerDownload()"><i class="fas fa-download"></i>تحميل الملف الناتج</button>
+  </div>
+  <p id="status"></p>
+</div>
+
+<script>
+let processedFileBlob = null;
+const file1Input = document.getElementById('file1');
+const file2Input = document.getElementById('file2');
+const statusElement = document.getElementById('status');
+const processButton = document.getElementById('processButton');
+const downloadButtonTrigger = document.getElementById('downloadButtonTrigger');
+const originalProcessButtonContent = processButton.innerHTML;
+
+function resetProcessState() {
+  processButton.disabled = false;
+  processButton.innerHTML = originalProcessButtonContent;
+  processButton.style.display = 'flex';
+  downloadButtonTrigger.style.display = 'none';
+  downloadButtonTrigger.disabled = true;
+  processedFileBlob = null;
+  statusElement.textContent = "";
+}
+
+function readFileAsLatin1Text(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = event => resolve(event.target.result);
+    reader.onerror = error => reject(error);
+    reader.readAsText(file, 'latin1');
+  });
+}
+
+async function processAndCombineFiles() {
+  const file1 = file1Input.files[0];
+  const file2 = file2Input.files[0];
+
+  if (!file1) {
+    statusElement.textContent = " إختر الملفات في الأول بعدها فكر في دمجها";
+    return;
+  }
+
+  processButton.disabled = true;
+  processButton.innerHTML = '<span class="spin"></span> جارٍ المعالجة...';
+  processedFileBlob = null;
+  statusElement.textContent = "";
+
+  try {
+    if (!file1.name.toLowerCase().endsWith('.cfg')) {
+        throw new Error("الملف الأول يجب أن يكون بصيغة .cfg فقط.");
+    }
+    if (file2 && !file2.name.toLowerCase().endsWith('.cfg')) {
+        throw new Error("الملف الثاني يجب أن يكون بصيغة .cfg فقط.");
+    }
+
+    const content1 = await readFileAsLatin1Text(file1);
+    let outputContent = "";
+
+    if (file2) {
+        const content2 = await readFileAsLatin1Text(file2);
+        
+        if (content2.trim() === "") {
+            outputContent = content1;
+        } else {
+            let insertionPointIndex = -1; 
+            for (let i = content2.length - 1; i >= 0; i--) {
+                if (content2[i] === ' ' || content2[i] === '\x00') {
+                    insertionPointIndex = i + 1; 
+                    break;
+                }
+            }
+
+            if (insertionPointIndex !== -1) {
+                const partBeforeInsertion = content2.substring(0, insertionPointIndex);
+                const partAfterInsertion = content2.substring(insertionPointIndex);
+                outputContent = partBeforeInsertion + content1 + partAfterInsertion;
+            } else {
+                statusElement.textContent = "تنبيه: لم يتم العثور على 'فراغ' في الملف الثاني. سيتم لصق محتوى الملف الأول في نهاية الملف الثاني.";
+                outputContent = content2 + content1;
+            }
+        }
+    } else {
+        outputContent = content1;
+    }
+
+    if (outputContent && !outputContent.endsWith('\n')) {
+        outputContent += '\n';
+    }
+    
+    if (outputContent === '\n' && content1.trim() === '' && (!file2 || (file2 && (await readFileAsLatin1Text(file2)).trim() === ''))) {
+         outputContent = "";
+    }
+
+    if (outputContent.trim() === "" && content1.trim() === "" && (!file2 || (file2 && (await readFileAsLatin1Text(file2)).trim() === ''))) {
+        statusElement.textContent = "الملفات المختارة فارغة أو لا يمكن معالجتها.";
+        throw new Error("الملفات فارغة.");
+    }
+
+    const bytes = new Uint8Array(outputContent.length);
+    for (let i = 0; i < outputContent.length; i++) {
+        bytes[i] = outputContent.charCodeAt(i) & 0xFF;
+    }
+    processedFileBlob = new Blob([bytes], { type: 'application/octet-stream' });
+
+    if (processedFileBlob.size === 0 && content1.trim() !== '') {
+        statusElement.textContent = "فشل إنشاء الملف الناتج، قد تكون المدخلات غير متوقعة.";
+        throw new Error("الملف الناتج فارغ على الرغم من وجود مدخلات.");
+    }
+
+    downloadButtonTrigger.style.display = 'flex';
+    downloadButtonTrigger.disabled = false;
+    processButton.style.display = 'none';
+    statusElement.textContent = "تمت المعالجة بنجاح! اضغط على زر التحميل.";
+
+  } catch (err) {
+    statusElement.textContent = "خطأ: " + err.message;
+    processButton.disabled = false;
+    processButton.innerHTML = originalProcessButtonContent;
+  }
+}
+
+function triggerDownload() {
+  if (!processedFileBlob || processedFileBlob.size === 0) {
+    if (!statusElement.textContent.startsWith("خطأ") && !statusElement.textContent.startsWith("الملفات المختارة فارغة")) {
+        statusElement.textContent = "لا يمكن تحميل ملف فارغ أو لم تتم المعالجة بنجاح.";
+    }
+    downloadButtonTrigger.disabled = true;
+    return;
+  }
+
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(processedFileBlob);
+  a.download = 'ul.cfg';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+  statusElement.textContent = "تم تحميل الملف، تحقق من مجلد التنزيل.";
+}
+</script>
+</body>
+</html>
