@@ -11,74 +11,72 @@
   <style>
     /* --- التنسيقات الأساسية (للشاشات الكبيرة) --- */
     body {
-      font-family: 'Tajawal', Arial, sans-serif;ns-serif;
-   
-   background-color: #0e0e0e; /* Changed to black */
+      font-family: 'Tajawal', Arial, sans-serif;
+      background-color: #0e0e0e; /* Changed to black */
       color: #e0e0e0;
       margin: 0;
- padding: 20px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
- }
+    }
     h1 {
       margin-top: 30px;
       margin-bottom: 30px;
       text-align: center;
       color: white;
- font-size: 32px;
+      font-size: 32px;
       line-height: 1.5;
     }
-    .highlight { color: red;
- }
+    .highlight { color: red; }
     .card {
       background-color: #1e1e1e;
       border-radius: 12px;
       padding: 40px 30px;
       margin: 0;
- width: 95%;
+      width: 95%;
       max-width: 700px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
       box-sizing: border-box;
- }
+    }
     h2 {
       color: #4fc3f7;
       font-size: 28px;
       margin-bottom: 20px;
       text-align: center;
- }
+    }
     p, li { 
       font-size: 20px;
       margin: 10px 0;
- }
+    }
     a {
       color: #4fc3f7;
       text-decoration: none;
       font-weight: bold;
- }
+    }
     a:hover { text-decoration: underline; }
     ul {
       text-align: right;
- padding-right: 20px;
+      padding-right: 20px;
       margin-top: 10px;
       margin-bottom: 15px;
       list-style-type: none;
     }
     label {
         display: block;
- text-align: right;
+        text-align: right;
         font-weight: bold;
         font-size: 18px;
         margin-top: 20px;
         margin-bottom: 8px;
         padding-right: 20px;
- }
+    }
     input[type="file"] {
       display: block;
       margin: 5px auto 15px auto;
       background-color: #2c2c2c;
- border: 1px solid #555;
+      border: 1px solid #555;
       padding: 14px;
       border-radius: 8px;
       color: #e0e0e0;
@@ -87,106 +85,110 @@
       cursor: pointer;
       font-size: 18px;
       box-sizing: border-box;
- }
+    }
     .button-container {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
- gap: 15px;
+      gap: 15px;
       margin-top: 30px;
     }
     #processButton, #downloadButtonTrigger {
       background-color: #2196f3;
- color: white !important;
+      color: white !important;
       border: none;
       padding: 16px 35px;
       font-size: 20px;
       border-radius: 10px;
       cursor: pointer;
- transition: background-color 0.3s, transform 0.3s, opacity 0.3s;
+      transition: background-color 0.3s, transform 0.3s, opacity 0.3s;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
       text-decoration: none;
       width: 100%;
- max-width: 450px;
+      max-width: 450px;
       box-sizing: border-box;
     }
-    #processButton:hover { background-color: #1976d2;
- }
-    #downloadButtonTrigger {
-      background-color: #4CAF50;
- }
+    #processButton:hover { background-color: #1976d2; }
+    #downloadButtonTrigger { background-color: #4CAF50; }
     #downloadButtonTrigger:hover { background-color: #45a049; }
     #downloadButtonTrigger:disabled {
       background-color: #cccccc;
- cursor: not-allowed;
+      cursor: not-allowed;
       opacity: 0.7;
     }
     .spin {
       border: 3px solid #f3f3f3;
- border-top: 3px solid #2196f3;
+      border-top: 3px solid #2196f3;
       border-radius: 50%;
       width: 22px;
       height: 22px;
       animation: spin 1s linear infinite;
       display: inline-block;
- }
+    }
     @keyframes spin {
-      0% { transform: rotate(0deg);
- }
-      100% { transform: rotate(360deg);
- }
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     #status {
       margin-top: 25px;
       font-size: 20px;
- font-weight: bold;
+      font-weight: bold;
       text-align: center;
       min-height: 28px;
     }
     i.fas, i.fab {
         margin-left: 10px;
- }
+    }
     ol {
         padding-right: 20px;
- }
+    }
+
+    /* --- التغيير الجديد هنا --- */
+    @keyframes color-cycle {
+  0%   { color: #ffeb3b; } /* Yellow */
+  50%  { color: #4fc3f7; } /* Sky Blue */
+  100% { color: #ffeb3b; } /* Yellow */
+    }
+
+    .colored-link {
+        animation: color-cycle 3s linear infinite;
+        font-weight: bold; 
+    }
+    
+    .colored-link:hover {
+        text-decoration: underline;
+    }
+    /* -------------------------- */
 
     /* --- التنسيقات المتجاوبة (للشاشات الصغيرة كالهواتف) --- */
     @media (max-width: 768px) {
       body {
         padding: 10px;
- }
+      }
       .card {
         padding: 25px 15px;
- margin: 15px 0;
+        margin: 15px 0;
       }
-      h1 {
-        font-size: 24px;
- }
-      h2 {
-        font-size: 20px;
- }
-      p, li {
-        font-size: 16px;
- }
+      h1 { font-size: 24px; }
+      h2 { font-size: 20px; }
+      p, li { font-size: 16px; }
       label {
         font-size: 16px;
         padding-right: 10px;
- }
+      }
       input[type="file"] {
           font-size: 16px;
- padding: 12px;
+          padding: 12px;
       }
       #processButton, #downloadButtonTrigger {
         font-size: 18px;
- padding: 15px 20px;
+        padding: 15px 20px;
       }
-      #status {
-        font-size: 17px;
- }
+      #status { font-size: 17px; }
     }
   </style>
 </head>
@@ -203,8 +205,8 @@
         <li><a href="https://t.me/mohtaref_ps2_1" target="_blank"><i class="fab fa-telegram"></i>قناة التليجرام</a></li>
         <li><a href="https://t.me/mohtaref_ps2_2" target="_blank"><i class="fas fa-users"></i>منتدى المتابعين</a></li>
         <li><a href="https://t.me/mohtaref_ps2_3" target="_blank"><i class="fas fa-comments"></i>مجموعة الموضوعات</a></li>
-        <li><a href="https://www.tiktok.com/@mohtaref_ps2?_t=ZS-8wugDoiUrII&_r=1" target="_blank"><i 
-class="fab fa-tiktok"></i>قناة التيك توك (محتوى اسطوري)</a></li>
+        <li><a href="https://www.tiktok.com/@mohtaref_ps2?_t=ZS-8wugDoiUrII&_r=1" target="_blank"><i class="fab fa-tiktok"></i>قناة التيك توك (محتوى اسطوري)</a></li>
+        <li><a href="https://youtu.be/TyjSCpAEzCU" target="_blank" class="colored-link"><i class="fas fa-video"></i>اضغط هنا لمشاهدة الشرح</a></li>
       </ul>
     </li>
     <li style="color: #ffeb3b;">حدد ملفات ul.cfg للدمج.</li>
@@ -218,8 +220,7 @@ class="fab fa-tiktok"></i>قناة التيك توك (محتوى اسطوري)</
 
   <div class="button-container">
     <button id="processButton" onclick="processAndCombineFiles()"><i class="fas fa-cogs"></i>اضغط هنا للدمج</button>
-    <button id="downloadButtonTrigger" style="display: none;"
-onclick="triggerDownload()"><i class="fas fa-download"></i>تحميل الملف الناتج</button>
+    <button id="downloadButtonTrigger" style="display: none;" onclick="triggerDownload()"><i class="fas fa-download"></i>تحميل الملف الناتج</button>
   </div>
   <p id="status"></p>
 </div>
